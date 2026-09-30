@@ -44,7 +44,7 @@ Shopify · Google Tag Manager · Google Analytics 4 · Shopify Customer Events �
 
 ## Demo
 
-- **Live store:** `reel-cozy.myshopify.com` (password available on request; Shopify development stores are always password protected)
+- **Live store:** [reel-cozy.myshopify.com](https://reel-cozy.myshopify.com) (password: `reelcozy`; Shopify development stores are always password protected)
 - **Video walkthrough:** coming soon
 
 ## Credits
