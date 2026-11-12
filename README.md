@@ -18,7 +18,18 @@ Shopify store owners often face the same issues:
 
 This project shows how to plan, implement and QA a full e-commerce tracking setup that fixes all three.
 
-## What's implemented
+## Progress
+
+- [x] Demo Shopify store: products, variants, SKUs, collections, shipping rules, discount code, test payments
+- [x] GA4 property and GTM container created and configured
+- [ ] Measurement plan
+- [ ] GTM installed on Shopify
+- [ ] E-commerce events (10) via GTM and Shopify custom pixel
+- [ ] Custom events
+- [ ] QA and Shopify vs GA4 reconciliation
+- [ ] Case study and video walkthrough
+
+## Scope
 
 | Area | Details |
 | --- | --- |
@@ -37,14 +48,15 @@ Shopify · Google Tag Manager · Google Analytics 4 · Shopify Customer Events �
 
 ```
 ├── docs/           Measurement plan and QA checklist
-├── gtm/            Exported GTM container (JSON)
-├── screenshots/    DebugView, Tag Assistant and store screenshots
+├── gtm/            Exported GTM container (JSON) and custom pixel code
+├── screenshots/    Store, Tag Assistant and DebugView screenshots
 └── case-study/     Full case study write-up
 ```
 
 ## Demo
 
 - **Live store:** [reel-cozy.myshopify.com](https://reel-cozy.myshopify.com) (password: `reelcozy`; Shopify development stores are always password protected)
+- **Measurement plan:** [Google Sheet (view only)](https://docs.google.com/spreadsheets/d/1deLIjYN1z12QVK1LNnkHJlp38lrAeMBVCRtrO5o84g8/edit?usp=sharing) (work in progress)
 - **Video walkthrough:** coming soon
 
 ## Credits
