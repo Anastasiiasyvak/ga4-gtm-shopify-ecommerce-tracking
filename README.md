@@ -23,7 +23,7 @@ This project shows how to plan, implement and QA a full e-commerce tracking setu
 - [x] Demo Shopify store: products, variants, SKUs, collections, shipping rules, discount code, test payments
 - [x] GA4 property and GTM container created and configured
 - [x] Measurement plan: business goals, KPIs and event specification (14 events)
-- [ ] GTM installed on Shopify
+- [x] GTM installed on Shopify
 - [ ] E-commerce events (10) via GTM and Shopify custom pixel
 - [ ] Custom events
 - [ ] QA and Shopify vs GA4 reconciliation
