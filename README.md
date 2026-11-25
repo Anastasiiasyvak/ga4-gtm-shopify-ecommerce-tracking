@@ -23,8 +23,9 @@ This project shows how to plan, implement and QA a full e-commerce tracking setu
 - [x] Demo Shopify store: products, variants, SKUs, collections, shipping rules, discount code, test payments
 - [x] GA4 property and GTM container created and configured
 - [x] Measurement plan: business goals, KPIs and event specification (14 events)
-- [x] GTM installed on Shopify
-- [ ] E-commerce events (10) via GTM and Shopify custom pixel
+- [x] GTM installed on Shopify, GA4 base tag published
+- [x] Storefront e-commerce events (6) via dataLayer and GTM, tested and published
+- [ ] Checkout e-commerce events (4) via Shopify custom pixel
 - [ ] Custom events
 - [ ] QA and Shopify vs GA4 reconciliation
 - [ ] Case study and video walkthrough
@@ -41,16 +42,38 @@ This project shows how to plan, implement and QA a full e-commerce tracking setu
 | Data quality | Duplicate purchase protection, internal traffic filter, QA log |
 | Reconciliation | Shopify orders vs GA4 purchases |
 
+## How storefront tracking works
+
+```
+Shopify theme snippet → dataLayer → GTM (1 Custom Event trigger + 1 GA4 Event tag) → GA4
+```
+
+- A Liquid snippet in the theme (`gtm/theme-datalayer-snippets.liquid`) pushes GA4-formatted e-commerce events to the dataLayer.
+- Cart events fire only after Shopify confirms the change, so failed requests (e.g. out of stock) are not tracked.
+- In GTM, one Custom Event trigger (regex) and one GA4 Event tag with "Send Ecommerce data" handle all six storefront events.
+- Every event was checked in the browser console, GTM Preview and GA4 DebugView.
+
+## Issues found during QA
+
+| Issue | Cause | Fix |
+| --- | --- | --- |
+| Two `page_view` hits per page | The theme updates the URL through the History API, and GA4 enhanced measurement counted it as a new page view | Turned off "Page changes based on browser history events" |
+| `item_category` = "Home page" for one product | Shopify's hidden "Home page" collection was first in the product's collection list | Skip that collection and use the first real one |
+| Empty `item_category` in cart events | The category lookup depended on pages the visitor had already seen | Build the lookup on the server for all products on every page |
+| Two `view_cart` events per cart opening | The theme marks the cart dialog as open more than once | Fire only when the dialog changes from closed to open |
+
+Full test cases are in the QA Log tab of the measurement plan.
+
 ## Tech stack
 
-Shopify · Google Tag Manager · Google Analytics 4 · Shopify Customer Events · Tag Assistant · GA4 DebugView · Google Sheets
+Shopify · Liquid · JavaScript · Google Tag Manager · Google Analytics 4 · Shopify Customer Events · Tag Assistant · GA4 DebugView · Google Sheets
 
 ## Repository structure
 
 ```
-├── docs/           Measurement plan and QA checklist
-├── gtm/            Exported GTM container (JSON) and custom pixel code
-├── screenshots/    Store, Tag Assistant and DebugView screenshots
+├── docs/           Measurement plan and QA log
+├── gtm/            Theme dataLayer code, exported GTM container (JSON) and custom pixel code
+├── screenshots/    Store, GTM Preview, DebugView and QA screenshots
 └── case-study/     Full case study write-up
 ```
 
